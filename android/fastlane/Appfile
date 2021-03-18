@@ -1,0 +1,2 @@
+json_key_file("/Users/yisell.rodriguez/Desktop/google_play_yi/pc-api-6216548620982862473-513-30f73f7bc946.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("com.superyimobile") # e.g. com.krausefx.app

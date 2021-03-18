@@ -1,0 +1,43 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  lane :tests do
+    gradle(task: "test")
+  end
+  desc "Deploy app to internal play store"
+  lane :internal do
+    gradle(
+      task: 'bundle',
+      build_type: 'Release',
+       properties: {
+          "android.injected.signing.store.file" => "/Users/yisell.rodriguez/Desktop/google_play_yi/dev_superti_key",
+          "android.injected.signing.store.password" => "Temp!234",
+          "android.injected.signing.key.alias" => "superyi",
+          "android.injected.signing.key.password" => "Temp!234",
+        }
+    )
+    supply(
+        track: "internal",
+        skip_upload_metadata: true,
+        validate_only: true,
+        skip_upload_apk: 'true',
+        skip_upload_images: true,
+        skip_upload_screenshots: true
+        )
+  end
+end
