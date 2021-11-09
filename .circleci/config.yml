@@ -1,13 +1,12 @@
 version: 2.1
 
-orbs:
- android: circleci/android@0.2.0
-
 jobs:
- build:
-   executor: android/android
-
-   steps:
-     - checkout
-     - run:
-        cd android && fastlane internal
+  build:
+    docker:
+      - image: circleci/android:api-30-node
+    steps:
+      - checkout
+      - run: npm install
+      - run: cd android && ./gradlew androidDependencies
+      - run: cd android && fastlane internal
+       
