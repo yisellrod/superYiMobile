@@ -19,22 +19,23 @@ platform :android do
   lane :tests do
     gradle(task: "test")
   end
+
   desc "Deploy app to internal play store"
   lane :internal do
     gradle(
       task: 'bundle',
       build_type: 'Release',
-       properties: {
-          "android.injected.signing.store.file" => "/Users/yisell.rodriguez/Desktop/google_play_yi/dev_superti_key",
+      properties: {
+          "android.injected.signing.store.file" => "/Users/yisell.rodriguez/Desktop/google_play_yi/backupsuperti_key.jks",
           "android.injected.signing.store.password" => "Temp!234",
-          "android.injected.signing.key.alias" => "superyi",
+          "android.injected.signing.key.alias" => "uploadKey",
           "android.injected.signing.key.password" => "Temp!234",
         }
     )
-    supply(
+    upload_to_play_store(
         track: "internal",
+        release_status: 'draft',
         skip_upload_metadata: true,
-        validate_only: true,
         skip_upload_apk: 'true',
         skip_upload_images: true,
         skip_upload_screenshots: true
