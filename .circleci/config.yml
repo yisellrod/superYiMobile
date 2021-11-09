@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: bundle install
+      - run: cd android && bundle install
       - run: cd android && ./gradlew androidDependencies
-      - run: cd android && fastlane internal
+      - run: cd android && bundle exec fastlane internal
        
